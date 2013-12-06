@@ -1,0 +1,7 @@
+## Interface: 50400
+## Title: Probably - Destro
+## Notes: ProbablyEngine Custom Destruction Warlock
+## Dependencies: Probably
+
+rotation.lua
+functions.lua
