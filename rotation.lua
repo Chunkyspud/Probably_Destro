@@ -6,8 +6,9 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
 { "109773", "!player.buff" },
 
 { "1490", { -- Curse of the Elements
-  "@destro.CurseofElements",
-  "target.debuff.duration <= 14" 
+  "@destro.Boss",
+  "target.debuff.duration <= 14",
+  "!modifier.last(1490)",
   }
 }, 
 
@@ -25,7 +26,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
 },
 
 { "!20707", { -- Soulstone
-  "modifier.ralt",
+  "modifier.rcontrol",
   "spell.casted < 1"
   }, "mouseover" 
 }, 
@@ -67,18 +68,16 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
     "toggle.sacrifice" 
 }},  
   -- Cooldowns
-  
-  { "18540", { -- Doomguard
-  "modifier.cooldowns",
-  "@destro.Doomguard" 
-  }},
-{ "112927", { -- Terrorguard
-  "modifier.cooldowns",
-  "@destro.Doomguard" 
-  }},
+{{
+  { "18540", "@destro.Doomguard" },
+  { "112927", "@destro.Doomguard" },
+ }, "modifier.cooldowns" },
 
 
  -- AOE
+  { "/cancelaura 108683", -- Brimstone off
+    "!modifier.multitarget"},
+
   { "108683", { -- Brimstone
     "!player.buff(108683)",
     "modifier.multitarget",
@@ -114,18 +113,18 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
     "modifier.multitarget",
    }},
 
-  { "!cancelaura 108683", { -- Brimstone off
-    "!modifier.multitarget"
-  }},
+  -- Opener
+{{
+  { "17962", "player.spell.charges >= 1" },
+  { "29722", "player.buff(117828).count > 3" },
+  { "116858", "player.embers >= 20" },
+  { "348", {
+    "target.debuff.duration <= 3",
+    "!modifier.last" }}
+ },
+  { "player.time < 25", "@destro.Boss", }},
   
   -- Rotation
-
-  { "348", { --Immolate
-    "target.debuff(348).duration <= 3",
-    "player.spell(348).casted < 1",
-    "@destro.interruptEvents(target)",
-    "!player.moving"
-}},  
 
 {{ -- ShadowBurn
   { "!17877", "player.buff(80240).count >= 1" }, -- Havoc
@@ -143,11 +142,17 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
   { "!17877", "player.buff(148906)" }, -- Kardris' Toxic Totem
   { "!17877", "player.buff(146184)" }, -- Blood of Y'Shaarj
   { "!17877", "player.embers = 35" }, -- Capped
-  { "!17877", "target.deathin < 20" }, -- TTD < 20
+  { "!17877", "target.deathin < 20" }, -- TTD < 30
 },
-  { 
-    "target.health < 20" 
+  { "target.health < 20" 
 }},
+
+{ "348", { --Immolate
+    "target.debuff(348).duration <= 3",
+    "player.spell(348).casted < 1",
+    "@destro.interruptEvents(target)",
+    "!player.moving",
+}},  
 
 {{ -- Chaos Bolt
   { "116858", { --Don't cap
@@ -167,8 +172,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
   { "116858", "player.buff(148906).duration > 2.7" }, -- Kardris' Toxic Totem
   { "116858", "player.buff(146184).duration > 2.7" }, -- Blood of Y'Shaarj
 },
-  { 
-    "target.health > 20", "@destro.interruptEvents(target)", "player.buff(117828).count < 3"  
+  { "target.health > 20", "@destro.interruptEvents(target)", 
 }},
  
   { "116858", { -- Chaos Bolt Havoc
@@ -181,7 +185,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
   { "17962", "player.spell(17962).charges >= 1" }, -- Conflagrate
 
   { "29722", { -- Incinerate
-    "player.buff(Backdraft)",
+    "player.buff(117828)",
     "@destro.interruptEvents(target)",
 }}, 
 
@@ -221,7 +225,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
     "!player.buff",
     "player.spell(108503).exists",
     "toggle.sacrifice"
-  }}
+  }},
 
 }, function()
 ProbablyEngine.toggle.create('sacrifice', 'Interface\\Icons\\warlock_grimoireofsacrifice', 'Sacrifice', 'Toggle Summon and Sacrifice')
