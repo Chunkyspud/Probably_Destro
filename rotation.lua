@@ -101,7 +101,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
     "modifier.multitarget",
   }},
 
-  { "114654", { -- Incinerate AOE
+  { "114654", { -- Incinerate Moving AOE
     "player.buff(108683)",
     "modifier.multitarget",
     "player.moving",
@@ -172,13 +172,14 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
   { "116858", "player.buff(148906).duration > 2.7" }, -- Kardris' Toxic Totem
   { "116858", "player.buff(146184).duration > 2.7" }, -- Blood of Y'Shaarj
 },
-  { "target.health > 20", "@destro.interruptEvents(target)", 
+  { "target.health > 20", "@destro.interruptEvents(target)", "!player.moving" 
 }},
  
   { "116858", { -- Chaos Bolt Havoc
       "player.buff(80240).count = 3",
       "target.health > 20",
-      "@destro.interruptEvents(target)"
+      "@destro.interruptEvents(target)",
+      "!player.moving"
   }},
 
 
