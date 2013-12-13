@@ -27,8 +27,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
 
 { "!20707", { -- Soulstone
   "modifier.rcontrol",
-  "spell.casted < 1"
-  }, "mouseover" 
+  "!mouseover.alive" 
 }, 
 
 { "!80240", "modifier.lalt", "mouseover" }, -- Havoc
@@ -69,9 +68,9 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
 }},  
   -- Cooldowns
 {{
-  { "18540", "@destro.Doomguard" },
-  { "112927", "@destro.Doomguard" },
- }, "modifier.cooldowns" },
+  { "18540" },
+  { "112927" },
+ }, "modifier.cooldowns"},
 
 
  -- AOE
@@ -141,7 +140,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
   { "!17877", "player.buff(148897)" }, -- Frenzied Crystal
   { "!17877", "player.buff(148906)" }, -- Kardris' Toxic Totem
   { "!17877", "player.buff(146184)" }, -- Blood of Y'Shaarj
-  { "!17877", "player.embers = 35" }, -- Capped
+  { "!17877", "player.embers >= 35" }, -- Capped
   { "!17877", "target.deathin < 20" }, -- TTD < 30
 },
   { "target.health < 20" 
