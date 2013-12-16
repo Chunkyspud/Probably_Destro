@@ -26,14 +26,14 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
 },
 
 { "!20707", { -- Soulstone
-  "modifier.rcontrol",
-  "!mouseover.alive" 
-}, 
+  "!mouseover.alive",
+  "modifier.ralt",
+}}, 
 
 { "!80240", "modifier.lalt", "mouseover" }, -- Havoc
 
   { "!113858", --Dark Soul: Instability
-  "modifier.lcontrol" 
+  "player.buff(146046)" 
   },
   
   -- Survival
@@ -68,8 +68,8 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
 }},  
   -- Cooldowns
 {{
-  { "18540" },
-  { "112927" },
+  { "18540", "player.buff(2825)" },
+  { "112927", "player.buff(2825)" },
  }, "modifier.cooldowns"},
 
 
@@ -193,7 +193,14 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
     "!player.spell(137587).exists", 
     "player.moving" 
 }},
-  
+
+{ "348", { --Immolate
+    "target.debuff(348).duration <= 3",
+    "player.spell(348).casted < 1",
+    "@destro.interruptEvents(target)",
+    "!player.moving",
+}},  
+
   { "29722", "@destro.interruptEvents(target)" }, -- Incinerate
 },
 {
