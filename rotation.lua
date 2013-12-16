@@ -33,7 +33,7 @@ ProbablyEngine.rotation.register_custom(267, "Destro",{
 { "!80240", "modifier.lalt", "mouseover" }, -- Havoc
 
   { "!113858", --Dark Soul: Instability
-  "player.buff(146046)" 
+  "modifier.lcontrol" 
   },
   
   -- Survival
